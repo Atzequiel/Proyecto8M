@@ -13,7 +13,7 @@ namespace Proyecto8M.Clases
     {
         static Conexion con = new Conexion();
         static MySqlConnection conn;
-
+        /*
         public static string getImagen(string id)
         {
             try
@@ -49,7 +49,7 @@ namespace Proyecto8M.Clases
                 }
             }
         }
-
+        */
         public static string[] getPerfil(string id)
         {
             try

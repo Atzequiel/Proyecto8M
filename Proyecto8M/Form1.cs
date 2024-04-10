@@ -30,12 +30,28 @@ namespace Proyecto8M
             lblOcupacion.Text = datos[3];
             lblLogro.Text = datos[4];
         }
-
+        
         private void mostrarImagen(String id)
         {
-        //    string imagen = Clases.Logica.getImagen(id);
-        // C: \Users\Administrator\source\repos\Proyecto8M\Proyecto8M\bin\Debug
-            pcbFoto.ImageLocation = @"../../Img/2cedfcd087d3541001155bf044dd0bc1.jpg";
+            //string imagen = Clases.Logica.getImagen(id);
+            //C: \Users\Administrator\source\repos\Proyecto8M\Proyecto8M\bin\Debug
+            Console.WriteLine(id);
+            if (id.Equals(1))
+            {
+                pcbFoto.ImageLocation = @"../../Img/1.jpg";
+            } 
+            else if (id.Equals(2))
+            {
+                pcbFoto.ImageLocation = @"../../Img/2.jpg";
+            }
+            else if (id.Equals(3))
+            {
+                pcbFoto.ImageLocation = @"../../Img/3.jpg";
+            }
+            else
+            {
+                pcbFoto.ImageLocation = @"../../Img/4.jpg";
+            }
         }
     }
 }

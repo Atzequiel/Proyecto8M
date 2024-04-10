@@ -12,10 +12,11 @@ namespace Proyecto8M.Clases
         {
             return Clases.Consultas.getPerfil(id);
         }
-
+        /*
         public static string getImagen(string id)
         {
             return Clases.Consultas.getImagen(id);
         }
+        */
     }
 }
