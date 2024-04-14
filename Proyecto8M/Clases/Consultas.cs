@@ -1,10 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+using System.Drawing;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto8M.Clases
@@ -13,30 +11,33 @@ namespace Proyecto8M.Clases
     {
         static Conexion con = new Conexion();
         static MySqlConnection conn;
-        /*
-        public static string getImagen(string id)
+
+        public static Image getImagen(string id)
         {
             try
             {
-                conn = con.createCon();
+                conn = con.openCon();
 
-                string sql = "SELECT i.imagen FROM Imagen i WHERE i.id = @id";
-                MySqlCommand cmd = new MySqlCommand(sql);
-                cmd.Parameters.AddWithValue("@id", id);
+                string sql = "SELECT imagen FROM Imagen WHERE imagen_id = ?";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("?", id);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
                 string imagen = null;
+                Image img = null;
 
                 while (dr.Read())
                 {
-                    imagen = dr.GetBodyDefinition("imagen");
+                    imagen = (string)dr["imagen"];
+                    img = Image.FromFile(imagen);
                 }
 
-                return imagen;
+                return img;
 
             }
-            catch (Exception e)
+            catch (MySqlException e)
             {
                 MessageBox.Show("Error al conseguir la imagen: " + e);
                 return null;
@@ -49,21 +50,21 @@ namespace Proyecto8M.Clases
                 }
             }
         }
-        */
+
         public static string[] getPerfil(string id)
         {
             try
             {
-                conn = con.createCon();
+                conn = con.openCon();
 
                 string sql = "SELECT p.*, "
                     + "GROUP_CONCAT(DISTINCT o.ocupacion ORDER BY o.ocupacion SEPARATOR ', ') AS ocupaciones, "
                     + "GROUP_CONCAT(DISTINCT l.logro ORDER BY l.logro SEPARATOR ', ') AS logros " + "FROM Perfil p "
                     + "LEFT JOIN Ocupacion o ON p.id = o.perfil_id " + "LEFT JOIN Logro l ON p.id = l.perfil_id "
-                    + "WHERE p.id = @id " + "GROUP BY p.id";
+                    + "WHERE p.id = ? " + "GROUP BY p.id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("?", id);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -71,16 +72,16 @@ namespace Proyecto8M.Clases
 
                 while (dr.Read())
                 {
-                    string nom1 = dr.GetBodyDefinition("nom1");
-                    string nom2 = dr.GetBodyDefinition("nom2");
-                    string ape1 = dr.GetBodyDefinition("ape1");
-                    string ape2 = dr.GetBodyDefinition("ape2");
+                    string nom1 = (string)dr["nom1"];
+                    string nom2 = dr.IsDBNull(dr.GetOrdinal("nom2")) ? null : (string)dr["nom2"];
+                    string ape1 = (string)dr["ape1"];
+                    string ape2 = dr.IsDBNull(dr.GetOrdinal("ape2")) ? null : (string)dr["ape2"];
                     string nomCompleto = unirNombres(nom1, nom2, ape1, ape2);
-                    string fechaNac = dr.GetBodyDefinition("fechaNac");
-                    string fechaFall = dr.GetBodyDefinition("fechaFall");
-                    string nacionalidad = dr.GetBodyDefinition("nacionalidad");
-                    string ocupacion = dr.GetBodyDefinition("ocupaciones");
-                    string logro = dr.GetBodyDefinition("logros");
+                    string fechaNac = dr.GetDateTime("fechaNac").ToString("d");
+                    string fechaFall = dr.GetDateTime("fechaFall").ToString("d");
+                    string nacionalidad = (string)dr["nacionalidad"];
+                    string ocupacion = (string)dr["ocupaciones"];
+                    string logro = (string)dr["logros"];
 
                     //datos = $"Nombre: {nomCompleto} :: {fechaNac} - {fechaFall} :: Nacionalidad: {nacionalidad} :: Ocupación: {ocupacion} :: Logró: {logro}";
 
@@ -89,7 +90,6 @@ namespace Proyecto8M.Clases
                     datos[2] = $"Nacionalidad: {nacionalidad}";
                     datos[3] = $"Ocupacion/es: {ocupacion}";
                     datos[4] = $"Logró: {logro}";
-
                 }
 
                 return datos;
@@ -99,6 +99,52 @@ namespace Proyecto8M.Clases
             {
                 MessageBox.Show("Error al conseguir datos: " + e);
                 return null;
+            }
+            finally
+            {
+                if (conn != null && conn.State != ConnectionState.Closed)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public static double getPromedioEdades(string nacionalidad)
+        {
+            try
+            {
+                conn = con.openCon();
+
+                string sql = "SELECT datediff(fechaFall, fechaNac) AS dias FROM perfil WHERE nacionalidad = ?";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("?", nacionalidad);
+
+                MySqlDataReader dr = cmd.ExecuteReader();
+
+                int dias = 0;
+                int sumaDias = 0;
+                int totalPersonas = 0;
+
+                while (dr.Read())
+                {
+                    if (!dr.IsDBNull(dr.GetOrdinal("dias")))
+                    {
+                        dias = dr.GetInt32("dias");
+                        sumaDias += dias;
+                        totalPersonas++;
+                    }
+                }
+
+                double promedioEdades = ((double)sumaDias / 365) / totalPersonas;
+
+                return promedioEdades;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error al conseguir datos: " + e);
+                return 0;
             }
             finally
             {

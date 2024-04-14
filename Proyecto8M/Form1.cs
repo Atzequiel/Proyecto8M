@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -8,7 +9,7 @@ namespace Proyecto8M
     public partial class Form1 : Form
     {
         public Form1()
-        {
+        { 
             InitializeComponent();
         }
 
@@ -35,22 +36,19 @@ namespace Proyecto8M
         {
             //string imagen = Clases.Logica.getImagen(id);
             //C: \Users\Administrator\source\repos\Proyecto8M\Proyecto8M\bin\Debug
+
             Console.WriteLine(id);
-            if (id.Equals(1))
+            Image imagen = Clases.Logica.getImagen(id);
+            pcbFoto.Image = imagen;
+        }
+
+        private void btnPromedioEdades_Click(object sender, EventArgs e)
+        {
+            string nacionalidad = cmbNacionalidad.SelectedItem.ToString();
+            double pe = Clases.Consultas.getPromedioEdades(nacionalidad);
+            if (pe != 0)
             {
-                pcbFoto.ImageLocation = @"../../Img/1.jpg";
-            } 
-            else if (id.Equals(2))
-            {
-                pcbFoto.ImageLocation = @"../../Img/2.jpg";
-            }
-            else if (id.Equals(3))
-            {
-                pcbFoto.ImageLocation = @"../../Img/3.jpg";
-            }
-            else
-            {
-                pcbFoto.ImageLocation = @"../../Img/4.jpg";
+                MessageBox.Show($"El promedio de nacionalidades {nacionalidad} es: " + pe.ToString("0.0"));
             }
         }
     }

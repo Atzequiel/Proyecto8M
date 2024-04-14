@@ -1,32 +1,31 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto8M.Clases
 {
     internal class Conexion
     {
-        MySqlConnection con = new MySqlConnection();
+        private readonly MySqlConnection con;
 
-        static string bd = "ProgYBD";
-        static string user = "root";
-        static string passwd = "root";
-        static string server = "localhost";
-        static string port = "3306";
+        private static readonly string bd = "ProgYBD";
+        private static readonly string user = "root";
+        private static readonly string passwd = "root";
+        private static readonly string server = "localhost";
+        private static readonly string port = "3306";
 
-        string conString = $"Server={server};Port= {port};Database={bd};Uid={user};Pwd={passwd};";
+        private readonly string conString = $"Server={server};Port={port};Database={bd};Uid={user};Pwd={passwd};";
 
-        public MySqlConnection createCon()
+        public Conexion()
+        {
+            con = new MySqlConnection(conString);
+        }
+
+        public MySqlConnection openCon()
         {
             try
-            { 
-                con.ConnectionString = conString;
+            {
                 con.Open();
-                Console.WriteLine($"Base de datos {bd}: OK");
                 return con;
             }
             catch (MySqlException ex)

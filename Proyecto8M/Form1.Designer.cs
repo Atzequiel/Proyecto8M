@@ -35,6 +35,9 @@
             this.lblOcupacion = new System.Windows.Forms.Label();
             this.lblLogro = new System.Windows.Forms.Label();
             this.pcbFoto = new System.Windows.Forms.PictureBox();
+            this.cmbNacionalidad = new System.Windows.Forms.ComboBox();
+            this.btnPromedioEdades = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,11 +128,47 @@
             this.pcbFoto.TabIndex = 6;
             this.pcbFoto.TabStop = false;
             // 
+            // cmbNacionalidad
+            // 
+            this.cmbNacionalidad.FormattingEnabled = true;
+            this.cmbNacionalidad.Items.AddRange(new object[] {
+            "Estadounidense",
+            "Británica",
+            "Alemana",
+            "Polaca",
+            "Húngara"});
+            this.cmbNacionalidad.Location = new System.Drawing.Point(10, 412);
+            this.cmbNacionalidad.Name = "cmbNacionalidad";
+            this.cmbNacionalidad.Size = new System.Drawing.Size(170, 21);
+            this.cmbNacionalidad.TabIndex = 7;
+            // 
+            // btnPromedioEdades
+            // 
+            this.btnPromedioEdades.Location = new System.Drawing.Point(10, 439);
+            this.btnPromedioEdades.Name = "btnPromedioEdades";
+            this.btnPromedioEdades.Size = new System.Drawing.Size(169, 19);
+            this.btnPromedioEdades.TabIndex = 9;
+            this.btnPromedioEdades.Text = "Promediar Edades";
+            this.btnPromedioEdades.UseVisualStyleBackColor = true;
+            this.btnPromedioEdades.Click += new System.EventHandler(this.btnPromedioEdades_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 383);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 26);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Seleccione una nacionalidad\r\n y haga el promedio de edad\r\n";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(192, 372);
+            this.ClientSize = new System.Drawing.Size(192, 468);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnPromedioEdades);
+            this.Controls.Add(this.cmbNacionalidad);
             this.Controls.Add(this.pcbFoto);
             this.Controls.Add(this.lblLogro);
             this.Controls.Add(this.lblOcupacion);
@@ -154,6 +193,9 @@
         private System.Windows.Forms.Label lblOcupacion;
         private System.Windows.Forms.Label lblLogro;
         private System.Windows.Forms.PictureBox pcbFoto;
+        private System.Windows.Forms.ComboBox cmbNacionalidad;
+        private System.Windows.Forms.Button btnPromedioEdades;
+        private System.Windows.Forms.Label label1;
     }
 }
 
