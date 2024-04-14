@@ -9,10 +9,10 @@ namespace Proyecto8M.Clases
 {
     internal class Consultas
     {
-        static Conexion con = new Conexion();
-        static MySqlConnection conn;
+        private static readonly Conexion con = new Conexion();
+        private static MySqlConnection conn;
 
-        public static Image getImagen(string id)
+        public static Image getImagen(int id)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace Proyecto8M.Clases
                 string sql = "SELECT imagen FROM Imagen WHERE imagen_id = ?";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("?", id);
+                _ = cmd.Parameters.AddWithValue("?", id);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -39,7 +39,7 @@ namespace Proyecto8M.Clases
             }
             catch (MySqlException e)
             {
-                MessageBox.Show("Error al conseguir la imagen: " + e);
+                _ = MessageBox.Show("Error al conseguir la imagen: " + e);
                 return null;
             }
             finally
@@ -51,7 +51,7 @@ namespace Proyecto8M.Clases
             }
         }
 
-        public static string[] getPerfil(string id)
+        public static string[] getPerfil(int id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Proyecto8M.Clases
                     + "WHERE p.id = ? " + "GROUP BY p.id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("?", id);
+                _ = cmd.Parameters.AddWithValue("?", id);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -83,8 +83,6 @@ namespace Proyecto8M.Clases
                     string ocupacion = (string)dr["ocupaciones"];
                     string logro = (string)dr["logros"];
 
-                    //datos = $"Nombre: {nomCompleto} :: {fechaNac} - {fechaFall} :: Nacionalidad: {nacionalidad} :: Ocupación: {ocupacion} :: Logró: {logro}";
-
                     datos[0] = $"Nombre: {nomCompleto}";
                     datos[1] = $"{fechaNac} - {fechaFall}";
                     datos[2] = $"Nacionalidad: {nacionalidad}";
@@ -97,7 +95,7 @@ namespace Proyecto8M.Clases
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error al conseguir datos: " + e);
+                _ = MessageBox.Show("Error al conseguir datos: " + e);
                 return null;
             }
             finally
@@ -118,7 +116,7 @@ namespace Proyecto8M.Clases
                 string sql = "SELECT datediff(fechaFall, fechaNac) AS dias FROM perfil WHERE nacionalidad = ?";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("?", nacionalidad);
+                _ = cmd.Parameters.AddWithValue("?", nacionalidad);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -136,14 +134,14 @@ namespace Proyecto8M.Clases
                     }
                 }
 
-                double promedioEdades = ((double)sumaDias / 365) / totalPersonas;
+                double promedioEdades = (double)sumaDias / 365 / totalPersonas;
 
                 return promedioEdades;
 
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error al conseguir datos: " + e);
+                _ = MessageBox.Show("Error al conseguir datos: " + e);
                 return 0;
             }
             finally
@@ -159,18 +157,18 @@ namespace Proyecto8M.Clases
         {
             StringBuilder nombreCompleto = new StringBuilder();
 
-            nombreCompleto.Append(nom1 + " ");
+            _ = nombreCompleto.Append(nom1 + " ");
 
             if (nom2 != null)
             {
-                nombreCompleto.Append(nom2 + " ");
+                _ = nombreCompleto.Append(nom2 + " ");
             }
 
-            nombreCompleto.Append(ape1 + " ");
+            _ = nombreCompleto.Append(ape1 + " ");
 
             if (ape2 != null)
             {
-                nombreCompleto.Append(ape2 + " ");
+                _ = nombreCompleto.Append(ape2 + " ");
             }
 
             return nombreCompleto.ToString().Trim();

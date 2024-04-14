@@ -79,49 +79,43 @@
             this.lblId.AutoSize = true;
             this.lblId.Location = new System.Drawing.Point(10, 50);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(35, 13);
+            this.lblId.Size = new System.Drawing.Size(0, 13);
             this.lblId.TabIndex = 1;
-            this.lblId.Text = "label1";
             // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
             this.lblFecha.Location = new System.Drawing.Point(10, 80);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(35, 13);
+            this.lblFecha.Size = new System.Drawing.Size(0, 13);
             this.lblFecha.TabIndex = 2;
-            this.lblFecha.Text = "label2";
             // 
             // lblNacionalidad
             // 
             this.lblNacionalidad.AutoSize = true;
             this.lblNacionalidad.Location = new System.Drawing.Point(10, 110);
             this.lblNacionalidad.Name = "lblNacionalidad";
-            this.lblNacionalidad.Size = new System.Drawing.Size(35, 13);
+            this.lblNacionalidad.Size = new System.Drawing.Size(0, 13);
             this.lblNacionalidad.TabIndex = 3;
-            this.lblNacionalidad.Text = "label3";
             // 
             // lblOcupacion
             // 
             this.lblOcupacion.AutoSize = true;
             this.lblOcupacion.Location = new System.Drawing.Point(10, 140);
             this.lblOcupacion.Name = "lblOcupacion";
-            this.lblOcupacion.Size = new System.Drawing.Size(35, 13);
+            this.lblOcupacion.Size = new System.Drawing.Size(0, 13);
             this.lblOcupacion.TabIndex = 4;
-            this.lblOcupacion.Text = "label4";
             // 
             // lblLogro
             // 
-            this.lblLogro.AutoSize = true;
             this.lblLogro.Location = new System.Drawing.Point(10, 170);
             this.lblLogro.Name = "lblLogro";
-            this.lblLogro.Size = new System.Drawing.Size(35, 13);
+            this.lblLogro.Size = new System.Drawing.Size(234, 108);
             this.lblLogro.TabIndex = 5;
-            this.lblLogro.Text = "label5";
             // 
             // pcbFoto
             // 
-            this.pcbFoto.Location = new System.Drawing.Point(10, 193);
+            this.pcbFoto.Location = new System.Drawing.Point(250, 20);
             this.pcbFoto.Name = "pcbFoto";
             this.pcbFoto.Size = new System.Drawing.Size(170, 170);
             this.pcbFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -137,17 +131,17 @@
             "Alemana",
             "Polaca",
             "Húngara"});
-            this.cmbNacionalidad.Location = new System.Drawing.Point(10, 412);
+            this.cmbNacionalidad.Location = new System.Drawing.Point(250, 232);
             this.cmbNacionalidad.Name = "cmbNacionalidad";
             this.cmbNacionalidad.Size = new System.Drawing.Size(170, 21);
             this.cmbNacionalidad.TabIndex = 7;
             // 
             // btnPromedioEdades
             // 
-            this.btnPromedioEdades.Location = new System.Drawing.Point(10, 439);
+            this.btnPromedioEdades.Location = new System.Drawing.Point(250, 259);
             this.btnPromedioEdades.Name = "btnPromedioEdades";
             this.btnPromedioEdades.Size = new System.Drawing.Size(169, 19);
-            this.btnPromedioEdades.TabIndex = 9;
+            this.btnPromedioEdades.TabIndex = 8;
             this.btnPromedioEdades.Text = "Promediar Edades";
             this.btnPromedioEdades.UseVisualStyleBackColor = true;
             this.btnPromedioEdades.Click += new System.EventHandler(this.btnPromedioEdades_Click);
@@ -155,17 +149,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 383);
+            this.label1.Location = new System.Drawing.Point(264, 203);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 26);
-            this.label1.TabIndex = 10;
+            this.label1.TabIndex = 6;
             this.label1.Text = "Seleccione una nacionalidad\r\n y haga el promedio de edad\r\n";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(192, 468);
+            this.ClientSize = new System.Drawing.Size(434, 291);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPromedioEdades);
             this.Controls.Add(this.cmbNacionalidad);
@@ -177,7 +171,7 @@
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.cmbPefil);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "8M";
             ((System.ComponentModel.ISupportInitialize)(this.pcbFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
